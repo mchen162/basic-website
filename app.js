@@ -20,7 +20,7 @@ app.get('', (req, res) =>{
 
 
 app.get('/about', (req, res) => {
-  res.render('about', { text: 'This is about'})
+  res.render('about', { text: 'About Me'})
 });
 
 //
