@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dogs</title>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  <script>
+    
+    function getRandomImage(){
+      const imageRandom = document.getElementById("imageRandom");
+      const imageBreed = document.getElementById("imageBreed");
+
+      const randomImageApiUrl = "https://dog.ceo/api/breeds/image/random";
+
+      fetch(randomImageApiUrl)
+        .then(function(response){
+        // we get raw response. need to first convert it into json format
+        return response.json();
+        })
+        .then(function(json){
+
+          console.log(json);
+          var imageUrl = json.message;
+          let url = json.message;
+          let parts = url.split("/")
+          var breedName = parts[parts.length-2];
+			    console.log(breedName);
+          imageBreed.innerHTML = breedName;
+          //update the image with new random url
+          imageRandom.src=imageUrl;
+      
+        })
+        .catch(function(error){
+        // if any error occurs like no internet connection then this callback will be       called
+          console.log(error);
+      
+        });
+    }
+    getRandomImage();
+  </script>
+  <button onClick="getRandomImage()">Fetch Dog!         </button>
+
+  <h1 id="imageBreed">Breed</h1>
+
+  <img id="imageRandom"/>
+   
+  <a href="./">Indexs</a>
+
+</body>
+</html>
